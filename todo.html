@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>todo</title>
+    <!-- CSS only -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+<!-- JavaScript Bundle with Popper -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
+
+</head>
+<body>
+    <center>
+
+    <h1>Todo list</h1>
+    <table class="border border-3 border-primary ">
+        <thead>
+            <tr>
+                <th class="border border-3 border-secondary">User Id </th>
+                <th class="border border-3 border-secondary">Id</th>
+                <th class="border border-3 border-secondary">Title</th>
+                <th class="border border-3 border-secondary">Completed</th>
+            </tr>
+        </thead>
+        <tbody id="result">
+
+        </tbody>
+    </table>
+</body>
+<script>
+    //AJAX call
+    //steps:
+    //1 create an object- XMLHttpRequest
+    var request=new XMLHttpRequest;
+    //2 call/API connection
+    request.open('get','https://jsonplaceholder.typicode.com/todos');
+    //3 send request to the server
+    request.send();
+    //4 set onreadystate change
+
+    // request.onreadystatechange=()=>{
+    //     if(request.readyState==4){
+    //         if(request.status>199 && request.status<300){
+    //         console.log(request.responseText)
+    //         let todos=JSON.parse(request.responseText)
+    //         console.log(todos)
+    //         displaycontent(todos)
+    //         }
+        
+    
+    //     } 
+    // }
+
+    //fetch()
+    fetch("https://jsonplaceholder.typicode.com/todos")
+    .then(data=>data.json())
+    .then(todos=>displaycontent(todos))
+
+    //5 Display content in html
+    function displaycontent(todos){
+        htmldata=``;
+        for(let todo of todos){
+            htmldata=`<tr>
+                <th class="border border-2 border-secondary">${todo.userid}</th>
+                <th class="border border-2 border-secondary">${todo.id}</th>
+                <th class="border border-2  border-secondary">${todo.title}</th>
+                <th class="border border-2  border-secondary">${todo.completed}</th>
+                </tr>`
+                result.innerHTML+=htmldata;
+        }
+
+    }
+    
+</script>
+</center>
+
+</html>
